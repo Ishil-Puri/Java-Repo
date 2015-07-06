@@ -1,7 +1,7 @@
 /**
  * 
  */
-package While_Lab;
+package Labs;
 
 /**
  * @author Ishil Puri
@@ -19,6 +19,10 @@ public class While_Lab {
 		bool();
 		System.out.println();
 		num();
+		System.out.println();
+		inc3();
+		System.out.println();
+		calbool();
 	}	
 	// #1 while loop for name 5 times
 	public static void wloop() {
@@ -42,11 +46,37 @@ public class While_Lab {
 
 		}
 	}
+	// #3 using if statement to figure out whether number is odd or even
 	public static void num() {
-		int i = 0;
+		int i = 1;
 		while(i<=10) {
-			
+			if (i%2==0){
+				System.out.println(i+ " is even.");
+			}else{
+				System.out.println(i+" is odd.");
+			}
+			i+=1;
+		}
+		System.out.println();
+	}
+	//#4 incrementing by 3
+	public static void inc3() {
+		int i = 1;
+		while(i<=30) {
+			i+=3;
+			System.out.println("loop");
+		}
+		i+=1;
+	}
+	//#5 California
+	public static void calbool() {
+		boolean flag = false;
+		while(flag==false) {
+			String state = "California";
+			state.substring(0,5);
+			System.out.println(state.substring(0, 6));
+			System.out.println("character found at position");
+			flag=true;
 		}
 	}
-
 }
