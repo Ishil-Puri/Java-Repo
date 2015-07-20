@@ -24,6 +24,15 @@ public class ArrayListLab {
 		System.out.println(removePlurals(console));
 		System.out.println();
 		ArrayList<Integer>num1 = new ArrayList<Integer>();
+			num1.add(1);
+			num1.add(2);
+			num1.add(3);
+		ArrayList<Integer>num2 = new ArrayList<Integer>();
+			num2.add(3);
+			num2.add(4);
+			num2.add(5);
+			num2.add(6);
+		System.out.println(intersectLists(num1, num2));
 		console.close();
 	}
 	//#1 adds strings inputed from the console into an arraylist and prints them
@@ -88,7 +97,21 @@ public class ArrayListLab {
 	return removed;
 	}
 	//#5 
-	//public static ArrayList<Integer> intersectLists(ArrayList<Integer>){
-		
-	//}
+	public static ArrayList<Integer> intersectLists(ArrayList<Integer> num1, ArrayList<Integer> num2){
+		ArrayList<Integer> newNum = new ArrayList<Integer>();
+		if (num1.size()>num2.size()){
+			for (int i : num1){
+				if (num2.contains(i)){
+					newNum.add(i);
+				}
+			}
+		}else{
+			for (int i : num1){
+				if (num2.contains(i)){
+					newNum.add(i);
+				}
+			}
+		}	
+		return newNum;
+	}
 }
