@@ -13,14 +13,16 @@ public class Hangman {
 
 	public static ArrayList<String> split = new ArrayList<String>();
 	public static ArrayList<String> guessed = new ArrayList<String>();
-	public static String[] comp = {"hi", "java", "what", "hello", "watermelon", "snowflake", "aardvark", "instructions", "donaldtrump", "aggragate"};
+	public static String[] cpu = {"hi", "java", "what", "hello", "watermelon", "snowflake", "aardvark", "instructions", "donaldtrump", "aggragate"};
 	public static int choice;
 	public static int count=0;
 	public static String word;
 	public static String guess;
 	public static boolean flag = true;
 	public static boolean g = false;
+	public static boolean punish = false;
 	public static int token = 0;
+	public static ArrayList<String> dashes;
 
 	/**
 	 * @param args
@@ -111,7 +113,7 @@ public class Hangman {
 	 */
 	public static void wordC(Scanner console){
 		print("\nWhat word would you like the opponent to guess?");
-		word = console.next();
+		word = console.next().toLowerCase();
 		if(word.length()>0){
 			System.out.println("---------------------------------------\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThank you! Player 2 may now look at the screen.\n");
 		}else{
@@ -122,23 +124,22 @@ public class Hangman {
 	public static void guess(String n, Scanner console){
 		System.out.println("\tGood luck guessing! The word is " + n.length() + " characters long! \n\tYou can only spare 6 incorrect guesses (unless you guess the whole word), use each one wisely: ");
 		addWord(n);
+		dashes = new ArrayList<String>();
 		//loop that keeps asking for guesses as long as the incorrect # of guesses is below <= 6 and they haven't guessed the whole word
 		while (g==false&&count<=6){
-			printBody();
-			System.out.println();
-			dashes();
-			print("\n\nWhat is your guess?  ");
-			guess = console.next();
-			for (int i=0; i<guessed.size(); i++){
-				if(guess==guessed.get(i)){
-					print("You already guessed that!");
-					while(guess==guessed.get(i)){
-						
-					}
-				}else{
-					break;
-				}
+			if(punish==true){
+				printBody();
+				punish=false;
+			}else{
+				
 			}
+			System.out.println();
+			dashes(n);
+			for (String i : dashes){
+				System.out.print(i);
+			}
+			print("\n\nWhat is your guess?  ");
+			guess = console.next().toLowerCase();
 			guessed.add(guess);
 			
 			if (guess.length()>1){
@@ -146,21 +147,17 @@ public class Hangman {
 					System.out.println("Player 2 Wins!");
 					g=true;
 				}else{
-					System.out.println("You Lose! Hint: patience is the key...");
+					System.out.println("You Lose! '" + n + "' was the word. Hint: patience is the key...");
 					System.exit(0);
 				}
 			}else{
 
-				/*for(String i:split){
-					System.out.println(i);
-				}*/
-				for (int i=0; i<=guessed.size()+1; i++){
-					
-				}
+//				for (int i=0; i<=guessed.size()+1; i++){
+//				}
 
 				for(int i=0; i<split.size(); i++){
 					if (split.get(i).equals(guess)){
-
+						dashes.set(i, guess);
 						split.remove(i);
 					}else{
 						token++;
@@ -172,9 +169,11 @@ public class Hangman {
 				}
 				else if (token==split.size()){
 					print("WRONG!");
+					punish = true;
 					count++;
 					token=0;
 				}else if(token<split.size()){
+					punish = false;
 					print("Nice guess!");
 					print("That's " + (n.length() - split.size()) + " down! "+split.size() + " left!" );
 					token=0;
@@ -185,10 +184,11 @@ public class Hangman {
 
 	}
 
-	public static void dashes(){
-		for (int i=0; i<split.size(); i++){
-			System.out.print('_');
+	public static ArrayList<String> dashes(String n){
+		for (int i=0; i<n.length(); i++){
+			dashes.add("_");
 		}
+		return dashes;
 	}
 
 	//adds word to an ArrayList
@@ -259,11 +259,11 @@ public class Hangman {
 
 	}
 	public static void easy(Scanner console){
-		word = comp[(int)(Math.random()*6)];
+		word = cpu[(int)(Math.random()*6)];
 		guess(word, console);
 	}
 	public static void hard(Scanner console){
-		word = comp[(int)(Math.random()*10+5)];
+		word = cpu[(int)(Math.random()*5+4)];
 		guess(word, console);
 	}
 }
