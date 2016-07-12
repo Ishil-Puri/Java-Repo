@@ -124,7 +124,7 @@ public class Hangman {
 	public static void guess(String n, Scanner console){
 		System.out.println("\tGood luck guessing! The word is " + n.length() + " characters long! \n\tYou can only spare 6 incorrect guesses (unless you guess the whole word), use each one wisely: ");
 		addWord(n);
-		dashes = new ArrayList<String>();
+		//dashes = new ArrayList<String>();
 		//loop that keeps asking for guesses as long as the incorrect # of guesses is below <= 6 and they haven't guessed the whole word
 		while (g==false&&count<=6){
 			if(punish==true){
@@ -134,10 +134,10 @@ public class Hangman {
 				
 			}
 			System.out.println();
-			dashes(n);
-			for (String i : dashes){
-				System.out.print(i);
-			}
+//			dashes(n);
+//			for (String i : dashes){
+//				System.out.print(i);
+//			}
 			print("\n\nWhat is your guess?  ");
 			guess = console.next().toLowerCase();
 			guessed.add(guess);
@@ -157,7 +157,7 @@ public class Hangman {
 
 				for(int i=0; i<split.size(); i++){
 					if (split.get(i).equals(guess)){
-						dashes.set(i, guess);
+					//	dashes.set(i, guess);
 						split.remove(i);
 					}else{
 						token++;
@@ -184,12 +184,12 @@ public class Hangman {
 
 	}
 
-	public static ArrayList<String> dashes(String n){
-		for (int i=0; i<n.length(); i++){
-			dashes.add("_");
-		}
-		return dashes;
-	}
+//	public static ArrayList<String> dashes(String n){
+//		for (int i=0; i<n.length(); i++){
+//			dashes.add("_");
+//		}
+//		return dashes;
+//	}
 
 	//adds word to an ArrayList
 	public static void addWord(String n){
